@@ -1,11 +1,13 @@
-
+import java.util.*;
 
 /**
  * @author RickiE
  * @version 1.0
  * @created 30-Jul-2021 10:27:07 AM
  */
-public class Task implements ITask {
+public class Task implements ITask
+//, Comparable<Task> {
+{
 
 	private int id;
 	private ArrayList<Parcel> parcelList;
@@ -17,10 +19,10 @@ public class Task implements ITask {
 
 
 	public void finalize() throws Throwable {
-
+		// TODO: Not sure.*
 	}
 	public Task(){
-
+		// TODO: Not sure.*
 	}
 
 	/**
@@ -31,7 +33,10 @@ public class Task implements ITask {
 	 * @param BFDResult
 	 */
 	public Task(int id, ArrayList<Parcel> parcelList, Algorithm FFDResult, Algorithm BFDResult){
-
+		this.id = id;
+		this.parcelList = parcelList;
+		this.FFDResult = FFDResult;
+		this.BFDResult = BFDResult;
 	}
 
 	/**
@@ -39,23 +44,23 @@ public class Task implements ITask {
 	 * @param parcel
 	 */
 	public void addParcel(Parcel parcel){
-
+		parcelList.add(parcel);
 	}
 
 	public int getId(){
-		return 0;
+		return id;
 	}
 
 	public Algorithm getFFDResult(){
-		return null;
+		return FFDResult;
 	}
 
 	public Algorithm getBFDResult(){
-		return null;
+		return BFDResult;
 	}
 
 	public ParcelList getParcelList(){
-		return null;
+		return ParcelList;
 	}
 
 	/**
@@ -63,7 +68,7 @@ public class Task implements ITask {
 	 * @param FFDResult
 	 */
 	public void setFFDResult(Algorithm FFDResult){
-
+		this.FFDResult = FFDResult;
 	}
 
 	/**
@@ -71,6 +76,14 @@ public class Task implements ITask {
 	 * @param BFDResult
 	 */
 	public void setBFDResult(Algorithm BFDResult){
-
+		this.BFDResult = BFDResult;
+	}
+	
+	
+	
+	@Override
+	public ArrayList<Parcel> getParcelList() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }//end Task
