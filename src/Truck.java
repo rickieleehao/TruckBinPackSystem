@@ -38,6 +38,10 @@ public class Truck {
 	public int getRemainSpace(){
 		return 0;
 	}
+	
+	public void setRemainSpace(int remainSpace) {
+		
+	}
 
 	public ArrayList<Parcel> getContainedParcel(){
 		return null;
