@@ -11,7 +11,7 @@ public class FFDAlgorithm extends Algorithm {
 	
 	private ArrayList<Parcel> parcelList;
 	private ArrayList<Truck> allocatedTrucks;
-	int[] capacityRem = new int[parcelList.size()];
+	private long timeTaken;
 	
 	public FFDAlgorithm(){
 
@@ -30,6 +30,7 @@ public class FFDAlgorithm extends Algorithm {
 			
 	}
 	
+	//not sure put at where yet
 	class SortByWeight implements Comparator<Parcel> {
 		public int compare(Parcel a, Parcel b) {
 			return b.getWeight() - a.getWeight(); //order in decreasing order
@@ -48,53 +49,38 @@ public class FFDAlgorithm extends Algorithm {
 	
 	
 
-	private void generateAllocatedTrucks(){
+	public void generateAllocatedTrucks(){
 		
+		long FFDStart = System.currentTimeMillis();
 		
-		int[] capacityRem = new int[parcelList.size()];
-		
-		for(int i = 0; i < parcelList.size(); i++) {
-			
-			int j;
-			
-			for(j = 0; j )
-		}
-	}
-	
-	private int n = 0;
-	private int size = 0;
-					
-	private void recursiveFFD(int n) {
-		
-		if(n == (parcelList.size() - 1)) {
-			FFD(n);
-			}
-		
-		else {
-			FFD(n);
-			recursiveFFD(n + 1);
-		}
-		
-		
-	}
-	
-	private void FFD(int i) {
+		for(int i = 0; i < parcelList.size(); i++)
+		{
 		int j;
 		
 		for(j = 0; j < allocatedTrucks.size(); j++) {
-			if(allocatedTrucks.get(j).getRemainSpace() >= parcelList.get(n).getWeight()) {
-				int remainSpace = allocatedTrucks.get(j).getRemainSpace() - parcelList.get(n).getWeight();
+			if(allocatedTrucks.get(j).getRemainSpace() >= parcelList.get(i).getWeight()) {
+				int remainSpace = allocatedTrucks.get(j).getRemainSpace() - parcelList.get(i).getWeight();
 				allocatedTrucks.get(j).setRemainSpace(remainSpace);
 				break;
 			}
 		}
 		
+		//If no trucks can accomodate the parcel, create new truck
 		if(j == allocatedTrucks.size()) {
-			int remainSpace = allocatedTrucks.get(j).getMaxCapacity() - parcelList.get(n).getWeight();
+			int remainSpace = allocatedTrucks.get(j).getMaxCapacity() - parcelList.get(i).getWeight();
 			allocatedTrucks.get(j).setRemainSpace(remainSpace);
 			allocatedTrucks.add(new Truck());
 			
+			}
 		}
+		
+		long FFDEnd = System.currentTimeMillis();
+		
+		timeTaken = FFDEnd - FFDStart;
+	}
+	
+	public float getTimeAllocated() {
+		return timeTaken;
 	}
 	
 

@@ -45,9 +45,8 @@ public abstract class Algorithm {
 		return 0;
 	}
 
-	private abstract void generateAllocatedTrucks();
+	public abstract void generateAllocatedTrucks(); //I changed to public (ze)
 
-	public float getTimeAllocated(){
-		return null;
-	}
+	public abstract float getTimeAllocated();
+	
 }//end Algorithm
