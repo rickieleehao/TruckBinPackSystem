@@ -1,32 +1,23 @@
+import java.util.ArrayList;
 
-
-/**
- * @author RickiE
- * @version 1.0
- * @created 30-Jul-2021 10:27:07 AM
- */
 public class Parcel {
 
 	private int weight;
-	private int MAX_WEIGHT = 20;
-	private static String WEIGHT_UNIT = KG;
-
-	public Parcel(){
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-	/**
-	 * 
-	 * @param weight
-	 */
-	public Parcel(int weight){
-
-	}
-
+	private static final int MAX_WEIGHT = 20;
+	private static String WEIGHT_UNIT = "KG";
+	
 	public int getWeight(){
-		return 0;
+		return weight;
 	}
+	
+	public int getMaxWeight() {
+		return MAX_WEIGHT;
+	}
+
+	public Parcel(int weight){
+		
+		this.weight = weight;
+
+	}
+
 }//end Parcel
