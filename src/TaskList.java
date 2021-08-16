@@ -13,22 +13,22 @@ public class TaskList implements ITaskData {
 	private ArrayList<Task> taskList;
 	private String fileName;
 	public Task m_Task;
-	private int taskIDCounter = 0;
 
-	public TaskList(){
+	public TaskList() {
 
 	}
 
 	public void finalize() throws Throwable {
 
 	}
+
 	/**
 	 * 
 	 * @param fileName
 	 */
-	public TaskList(String fileName){
-		// TODO: No need read in task in my opinion, since the task will be null.
-		
+	public TaskList(String fileName) {
+		// TODO: How to cast when reading string?
+
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(fileName));
 
@@ -46,10 +46,10 @@ public class TaskList implements ITaskData {
 		}
 	}
 
-	public int generateTaskId(){
-		
-		//TODO: what is this for?
-		
+	public int generateTaskId() {
+
+		int taskIDCounter = 0;
+
 		taskIDCounter++;
 		return taskIDCounter - 1;
 	}
@@ -58,7 +58,7 @@ public class TaskList implements ITaskData {
 	 * 
 	 * @param newTask
 	 */
-	public void addTask(Task newTask){
+	public void addTask(Task newTask) {
 		taskList.add(newTask);
 	}
 
@@ -66,45 +66,38 @@ public class TaskList implements ITaskData {
 	 * 
 	 * @param id
 	 */
-	
-/*	public Task searchTask(int id) {
-		boolean found = false;
-		int i = 0;
-		int count = taskList.size();
-		
-		Task theTask = null;
-		
-		while (i < count && !found) {
-			theTask = taskList.get(i);
-			if (theTask.getId().equals(id))
-				found = true;
-			else
-				i++;
-		}
-		if (!found)
-			theTask = null;
 
-		return theTask;
-	}*/
-	
-	public Task getTask(int id){
-		
-		//TODO: Not sure. Can try for loop.
-		
+	/*
+	 * public Task searchTask(int id) { boolean found = false; int i = 0; int count
+	 * = taskList.size();
+	 * 
+	 * Task theTask = null;
+	 * 
+	 * while (i < count && !found) { theTask = taskList.get(i); if
+	 * (theTask.getId().equals(id)) found = true; else i++; } if (!found) theTask =
+	 * null;
+	 * 
+	 * return theTask; }
+	 */
+
+	public Task getTask(int id) {
+
+		// TODO: Not sure. Can try for loop.
+
 		Iterator iterator = taskList.iterator();
-		while(iterator.hasNext()) {
-			if(iterator.next().equals(id)) {
+		while (iterator.hasNext()) {
+			if (iterator.next().equals(id)) {
 				return (Task) iterator.next();
 			}
 		}
 		return null;
 	}
 
-	public ArrayList<Task> getTaskList(){
+	public ArrayList<Task> getTaskList() {
 		return taskList;
 	}
 
-	public void writeToFile(){
-		// TODO: Not in controller?*
+	public void writeToFile() {
+		// TODO: write here?
 	}
-}//end TaskList
+}// end TaskList

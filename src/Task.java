@@ -1,10 +1,5 @@
 import java.util.*;
 
-/**
- * @author RickiE
- * @version 1.0
- * @created 30-Jul-2021 10:27:07 AM
- */
 public class Task implements ITask
 //, Comparable<Task> {
 {
@@ -17,21 +12,13 @@ public class Task implements ITask
 	public Algorithm m_Algorithm;
 
 
-
-	public void finalize() throws Throwable {
-		// TODO: Not sure.*
+	public Task(int id){
+		this.id = id;
+		this.parcelList = null;
+		this.FFDResult = null;
+		this.BFDResult = null;
 	}
-	public Task(){
-		// TODO: Not sure.*
-	}
 
-	/**
-	 * 
-	 * @param id
-	 * @param parcelList
-	 * @param FFDResult
-	 * @param BFDResult
-	 */
 	public Task(int id, ArrayList<Parcel> parcelList, Algorithm FFDResult, Algorithm BFDResult){
 		this.id = id;
 		this.parcelList = parcelList;
@@ -39,10 +26,6 @@ public class Task implements ITask
 		this.BFDResult = BFDResult;
 	}
 
-	/**
-	 * 
-	 * @param parcel
-	 */
 	public void addParcel(Parcel parcel){
 		parcelList.add(parcel);
 	}
