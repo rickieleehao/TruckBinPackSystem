@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import FFDAlgorithm.SortByWeight;
 
 public class BFDAlgorithm extends Algorithm {
 
 	private ArrayList<Parcel> parcelList;
 	private static ArrayList<Truck> allocatedTrucks;
-	private long timeTaken;
+	private float timeAllocated;
+	private int remainingCapacity;
 	
 	public BFDAlgorithm(){
 		
@@ -46,12 +46,16 @@ public class BFDAlgorithm extends Algorithm {
 	 */
 	public BFDAlgorithm(ArrayList<Truck> allocatedTrucks, float timeAllocated, int remainingCapacity){
 		this.allocatedTrucks = allocatedTrucks;
+		this.timeAllocated = timeAllocated;
+		this.remainingCapacity = remainingCapacity;
 	}
 	
 	
 	public void generateAllocatedTrucks(){
 		
 		int res = 0;
+		
+		long BFDStart = System.currentTimeMillis();
 		
 		for(int i = 0; i < res; i++) {
 			
@@ -76,7 +80,21 @@ public class BFDAlgorithm extends Algorithm {
 				allocatedTrucks.get(bi).setRemainSpace(remainSpace);
 			}
 		}
+		
+		long BFDEnd = System.currentTimeMillis();
+		
+		timeAllocated = BFDEnd - BFDStart;
 	}
+	
+	public float getTimeAllocated() {
+		return timeAllocated;
+	}
+	
+	//remaining capacity for all algorithms same
+	public float getRemainingSpace() {
+		return remainingCapacity;
+	}
+	
 	
 	public static void main(String[] args) {
 		allocatedTrucks.add(new Truck());

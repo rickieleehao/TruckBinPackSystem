@@ -11,7 +11,8 @@ public class FFDAlgorithm extends Algorithm {
 	
 	private ArrayList<Parcel> parcelList;
 	private ArrayList<Truck> allocatedTrucks;
-	private long timeTaken;
+	private float timeAllocated;
+	private int remainingCapcity;
 	
 	public FFDAlgorithm(){
 
@@ -45,6 +46,8 @@ public class FFDAlgorithm extends Algorithm {
 	 */
 	public FFDAlgorithm(ArrayList<Truck> allocatedTrucks, float timeAllocated, int remainingCapacity){
 		this.allocatedTrucks = allocatedTrucks;
+		this.timeAllocated = timeAllocated;
+		this.remainingCapacity = remainingCapacity;
 	}
 	
 	
@@ -76,11 +79,15 @@ public class FFDAlgorithm extends Algorithm {
 		
 		long FFDEnd = System.currentTimeMillis();
 		
-		timeTaken = FFDEnd - FFDStart;
+		timeAllocated = FFDEnd - FFDStart;
 	}
 	
 	public float getTimeAllocated() {
-		return timeTaken;
+		return timeAllocated;
+	}
+	
+	public int getRemainingCapacity() {
+		return remainingCapacity;
 	}
 	
 
