@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 /**
  * @author RickiE
@@ -38,7 +38,7 @@ public abstract class Algorithm {
 	}
 
 	public ArrayList<Truck> getAllocatedTrucks(){
-		return null;
+		return this.allocatedTruck;
 	}
 
 	public int getRemainingCapacity(){

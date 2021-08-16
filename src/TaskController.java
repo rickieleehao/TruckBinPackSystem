@@ -1,63 +1,47 @@
+import java.util.ArrayList;
 
-
-/**
- * @author RickiE
- * @version 1.0
- * @created 30-Jul-2021 10:27:08 AM
- */
-public class TaskController {
+public class TaskController implements Controller {
 
 	private ITask task;
 	private ITaskData taskList;
 
-	public TaskController(){
+	public TaskController() {
 
 	}
 
-	public void finalize() throws Throwable {
-
-	}
-	/**
-	 * 
-	 * @param task
-	 */
-	public TaskController(Task task){
+	public TaskController(Task task) {
 
 	}
 
-	public void createTask(){
+	public TaskController(TaskList taskList) {
+		this.taskList = taskList;
+	}
+
+	public void createTask() {
 
 	}
 
-	/**
-	 * 
-	 * @param parcel
-	 */
-	public void addParcel(Parcel parcel){
+	public void addParcel(Parcel parcel) {
 
 	}
 
-	public void generateBFDResult(){
+	public void generateBFDResult() {
 
 	}
 
-	public void generateFFDResult(){
+	public void generateFFDResult() {
 
 	}
 
-	public Task getTask(){
+	public Task getTask() {
+		return (Task) this.task;
+	}
+	
+	public Task getTask(int taskId) {
 		return null;
 	}
 
-	/**
-	 * 
-	 * @param taskId
-	 */
-	public Task getTask(int taskId){
+	public ArrayList<Task> getTaskList() {
 		return null;
 	}
-
-	public ArrayList<Task> getTaskList(){
-		return null;
-	}
-}//end TaskController
+}

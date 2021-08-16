@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class Parcel {
 
-	private int weight;
+	private double weight;
 	private static final int MAX_WEIGHT = 20;
 	private static String WEIGHT_UNIT = "KG";
 	
-	public int getWeight(){
+	public double getWeight(){
 		return weight;
 	}
 	
@@ -14,10 +14,8 @@ public class Parcel {
 		return MAX_WEIGHT;
 	}
 
-	public Parcel(int weight){
-		
+	public Parcel(double weight){
 		this.weight = weight;
-
 	}
 
 }//end Parcel
