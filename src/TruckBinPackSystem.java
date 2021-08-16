@@ -10,7 +10,7 @@ public class TruckBinPackSystem {
 		mainUI.start();
 		System.out.println("\n--------------------------------------------------");
 		System.out.println("Thanks for using TruckBinPackSystem!");
-		System.out.println("--------------------------------------------------");
-		
+		System.out.println("--------------------------------------------------");	
+		scanner.close();
 	}
 }

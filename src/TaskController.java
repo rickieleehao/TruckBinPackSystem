@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class TaskController implements Controller {
 
-	private ITask task;
+	private ITask task; //creating task
 	private ITaskData taskList;
 
 	public TaskController() {
@@ -18,11 +18,11 @@ public class TaskController implements Controller {
 	}
 
 	public void createTask() {
-
+		this.task = new Task();
 	}
 
 	public void addParcel(Parcel parcel) {
-
+		this.task.addParcel(parcel);
 	}
 
 	public void generateBFDResult() {
@@ -38,7 +38,7 @@ public class TaskController implements Controller {
 	}
 	
 	public Task getTask(int taskId) {
-		return null;
+		return taskList.getTask(taskId);
 	}
 
 	public ArrayList<Task> getTaskList() {

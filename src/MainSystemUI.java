@@ -26,7 +26,7 @@ public class MainSystemUI {
 					System.out.println("3. Display all tasks");
 					System.out.println("4. Exit");
 					System.out.print("Pick option (1-4) ----> ");
-					choice = scanner.nextInt();
+					choice = this.scanner.nextInt();
 					scanner.nextLine();
 					error = false;
 				} catch (InputMismatchException e) {
@@ -57,7 +57,7 @@ public class MainSystemUI {
 		}
 	}
 
-	public void createTask() {
+	private void createTask() {
 		this.control.createTask();
 		boolean repeat = true, error = true;
 		System.out.println("-----------------------");
@@ -93,18 +93,18 @@ public class MainSystemUI {
 			}
 		}
 
-		this.control.generateBFDResult();
+		this.control.generateBFDResult(); // this.control.generateAlgorithmResult
 		this.control.generateFFDResult();
 		printResult(this.control.getTask());
 	}
 
-	public void searchTask() {
+	private void searchTask() {
 		Task retrievedTask = null;
-		boolean isFound = false;
+		boolean isFound = false, exit = false;
 		System.out.println("-----------------------");
 		System.out.println("   Searching a Task");
 		System.out.println("-----------------------");
-		while (!isFound) {
+		while (!isFound || exit) {
 			try {
 				System.out.print("Kindly enter the Task ID -> ");
 				retrievedTask = this.control.getTask(this.scanner.nextInt());
@@ -113,39 +113,40 @@ public class MainSystemUI {
 				scanner.nextLine();
 				System.out.println("Please enter a valid Task ID.\n");
 				System.out.println("e.g. 001");
-			}
+			} // option to cancel the searching progress
 		}
 
 		printResult(retrievedTask);
 	}
 
-	public void displayAllTasks() {
+	private void displayAllTasks() {
 		System.out.println("-----------------------");
 		System.out.println("Displaying all Tasks result ");
 		System.out.println("-----------------------");
 
 		for (Task task : this.control.getTaskList())
-			printResult(task);
+			printResult(task); // fetch data from file
 	}
 
 	private void printResult(Task task) {
-		Algorithm algoBFD, algoFFD;
-		algoBFD = task.getBFDResult();
-		algoFFD = task.getFFDResult();
+		Algorithm algo;
 
 		for (int algoType = 1; algoType <= 2; algoType++) {
-			if (algoType == 1)
+			if (algoType == 1) {
+				algo = task.getBFDResult();
 				System.out.println("Best Fit Decreasing:-");
-			else // algoType == 2
+			} else { // algoType == 2
+				algo = task.getFFDResult();
 				System.out.println("First Fit Decreasing:-");
-
-			System.out.println("Number of truck allocated -> " + algoBFD.getAllocatedTrucks().size());
-			for (int i = 0; i < algoBFD.getAllocatedTrucks().size(); i++) {
-				System.out.println("Truck " + i + 1);
-				System.out.println(algoBFD.getAllocatedTrucks().get(i));
 			}
-			System.out.println("Time Allocated -> " + algoBFD.getTimeAllocated());
-			System.out.println("Remaining Capacity -> " + algoBFD.getRemainingCapacity());
+
+			System.out.println("Number of truck allocated -> " + algo.getAllocatedTrucks().size());
+			for (int i = 0; i < algo.getAllocatedTrucks().size(); i++) {
+				System.out.println("Truck " + i + 1);
+				System.out.println(algo.getAllocatedTrucks().get(i));
+			}
+			System.out.println("Time Allocated -> " + algo.getTimeAllocated());
+			System.out.println("Remaining Capacity -> " + algo.getRemainingCapacity());
 		}
 		System.out.println("");
 	}
