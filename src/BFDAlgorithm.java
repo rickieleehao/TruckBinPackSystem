@@ -53,31 +53,32 @@ public class BFDAlgorithm extends Algorithm {
 	
 	public void generateAllocatedTrucks(){
 		
-		int res = 0;
-		
 		long BFDStart = System.currentTimeMillis();
 		
-		for(int i = 0; i < res; i++) {
+		for(int i = 0; i < parcelList.size(); i++) { //while there is parcel, continue looping
 			
-			int j, min = allocatedTrucks.get(0).getMaxCapacity() + 1, bi = 0;
+			int j;
+			int min = allocatedTrucks.get(0).getMaxCapacity() + 1; //initialize minimum space
+			int bestTruck = 0; //initialize best truck
 			
 			for(j = 0; j < allocatedTrucks.size(); j++) {
-				if(allocatedTrucks.get(j).getRemainSpace() >= parcelList.get(i).getWeight() && allocatedTrucks.get(j).getRemainSpace() - parcelList.get(i).getWeight() < min) {
-					bi = j;
-					min = allocatedTrucks.get(j).getRemainSpace() - parcelList.get(i).getWeight();
+				//if trucks remaining capacity larger than parcel weight AND
+				//(remaining capacity - parcel weight) lesser than minimum capacity
+				if(allocatedTrucks.get(j).getRemainingCapacity() >= parcelList.get(i).getWeight() && allocatedTrucks.get(j).getRemainingCapacity() - parcelList.get(i).getWeight() < min) {
+					bestTruck = j; //set best bin to this truck
+					min = allocatedTrucks.get(j).getRemainingCapacity() - parcelList.get(i).getWeight();
 				}
 			}
 			
 			//If no trucks can accomodate the parcel, create new truck
 			if(min == allocatedTrucks.get(0).getMaxCapacity() + 1) {
-				int remainSpace = allocatedTrucks.get(0).getMaxCapacity() - parcelList.get(i).getWeight();
-				allocatedTrucks.get(allocatedTrucks.size()).setRemainSpace(remainSpace);
 				allocatedTrucks.add(new Truck());
+				allocatedTrucks.get(allocatedTrucks.size()).deductCapacity(parcelList.get(i).getWeight());
 			}
 			
+			//assign parcel to best truck
 			else {
-				int remainSpace = allocatedTrucks.get(bi).getRemainSpace() - parcelList.get(i).getWeight();
-				allocatedTrucks.get(bi).setRemainSpace(remainSpace);
+				allocatedTrucks.get(bestTruck).deductCapacity(parcelList.get(i).getWeight());
 			}
 		}
 		

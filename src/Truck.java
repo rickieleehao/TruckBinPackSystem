@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 /**
  * @author RickiE
@@ -11,6 +11,7 @@ public class Truck {
 	private static String CAPACITY_UNIT = KG;
 	private static int MAX_CAPACITY = 20;
 	public Parcel m_Parcel;
+	private int remainingCapacity = 20;
 
 	public Truck(){
 
@@ -30,13 +31,17 @@ public class Truck {
 	public void addParcel(){
 
 	}
-
-	public int getMaxCapacity(){
-		return 0;
+	
+	public void deductCapacity(int parcelWeight) {
+		remainingCapacity -= parcelWeight;
+	}
+	
+	public int getRemainingCapacity() {
+		return remainingCapacity;
 	}
 
-	public int getRemainSpace(){
-		return 0;
+	public int getMaxCapacity(){
+		return MAX_CAPACITY;
 	}
 	
 	public void setRemainSpace(int remainSpace) {
