@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Truck {
 
 	private ArrayList<Parcel> containedParcel;
-	private static String CAPACITY_UNIT = KG;
+	private static String CAPACITY_UNIT = "KG";
 	private static int MAX_CAPACITY = 20;
 	public Parcel m_Parcel;
 	private int remainingCapacity = 20;

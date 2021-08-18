@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public abstract class Algorithm {
 
+	private ArrayList<Parcel> parcelList;
 	protected ArrayList<Truck> allocatedTruck;
 	protected float timeAllocated;
 	protected int remainingCapacity;
@@ -26,7 +27,11 @@ public abstract class Algorithm {
 	 * @param remainingCapacity
 	 */
 	public Algorithm(ArrayList<Truck> allocatedTrucks, float timeAllocated, int remainingCapacity){
-
+		
+		this.allocatedTruck = allocatedTrucks;
+		this.timeAllocated = timeAllocated;
+		this.remainingCapacity = remainingCapacity;
+		
 	}
 
 	/**
@@ -34,7 +39,9 @@ public abstract class Algorithm {
 	 * @param parcelList
 	 */
 	public Algorithm(ArrayList<Parcel> parcelList){
-
+		
+		this.parcelList = parcelList;
+		
 	}
 
 	public ArrayList<Truck> getAllocatedTrucks(){
@@ -42,7 +49,7 @@ public abstract class Algorithm {
 	}
 
 	public int getRemainingCapacity(){
-		return 0;
+		return this.remainingCapacity;		
 	}
 
 	public abstract void generateAllocatedTrucks(); //I changed to public (ze)
