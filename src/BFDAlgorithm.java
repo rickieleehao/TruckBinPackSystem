@@ -85,6 +85,10 @@ public class BFDAlgorithm extends Algorithm {
 		long BFDEnd = System.currentTimeMillis();
 		
 		timeAllocated = BFDEnd - BFDStart;
+		
+		for(int r; r < allocatedTrucks.size(); r++) {
+			remainingCapacity += allocatedTrucks.get(r).getRemainingCapacity();
+		}
 	}
 	
 	public float getTimeAllocated() {
@@ -92,7 +96,7 @@ public class BFDAlgorithm extends Algorithm {
 	}
 	
 	//remaining capacity for all algorithms same
-	public float getRemainingSpace() {
+	public float getRemainingCapacity() {
 		return remainingCapacity;
 	}
 	

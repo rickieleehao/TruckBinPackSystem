@@ -75,6 +75,10 @@ public class FFDAlgorithm extends Algorithm {
 		long FFDEnd = System.currentTimeMillis();
 
 		timeAllocated = FFDEnd - FFDStart;
+		
+		for(int r; r < allocatedTrucks.size(); r++) {
+			remainingCapacity += allocatedTrucks.get(r).getRemainingCapacity();
+		}
 	}
 
 	public float getTimeAllocated() {

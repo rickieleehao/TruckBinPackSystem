@@ -26,14 +26,19 @@ public class TaskController implements Controller {
 	}
 
 	public void generateBFDResult() {
-
+		BFDAlgorithm algoBFD = new BFDAlgorithm();
+		
+		algoBFD.generateAllocatedTrucks();
 	}
 
 	public void generateFFDResult() {
-
+		FFDAlgorithm algoFFD = new FFDAlgorithm();
+		
+		algoFFD.generateAllocatedTrucks();
 	}
 
 	public Task getTask() {
+		
 		return (Task) this.task;
 	}
 	
