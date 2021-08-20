@@ -18,7 +18,7 @@ public class TaskController implements Controller {
 	}
 
 	public void createTask() {
-		this.task = new Task();
+		
 	}
 
 	public void addParcel(Parcel parcel) {

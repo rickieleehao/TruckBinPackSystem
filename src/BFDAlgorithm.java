@@ -27,17 +27,18 @@ public class BFDAlgorithm extends Algorithm {
 	 * @param parcelList
 	 */
 	public BFDAlgorithm(ArrayList<Parcel> parcelList){
-		Collections.sort(parcelList, new SortByWeight()); //sort by comparator
+		//Collections.sort(parcelList, new SortByWeight()); //sort by comparator
 		this.parcelList = parcelList;
 	}
 	
+	/*
 	//not sure put at where yet
 		class SortByWeight implements Comparator<Parcel> {
 			public int compare(Parcel a, Parcel b) {
 				return b.getWeight() - a.getWeight(); //order in decreasing order
 			}
 		}
-
+	*/
 	/**
 	 * 
 	 * @param allocatedTrucks
@@ -54,16 +55,17 @@ public class BFDAlgorithm extends Algorithm {
 	public void generateAllocatedTrucks(){
 		
 		long BFDStart = System.currentTimeMillis();
+		Truck truck = new Truck();
 		
 		for(int i = 0; i < parcelList.size(); i++) { //while there is parcel, continue looping
 			
 			int j;
-			int min = allocatedTrucks.get(0).getMaxCapacity() + 1; //initialize minimum space
+			int min = truck.getMaxCapacity() + 1; //initialize minimum space
 			int bestTruck = 0; //initialize best truck
 			
 			for(j = 0; j < allocatedTrucks.size(); j++) {
 				//if trucks remaining capacity larger than parcel weight AND
-				//(remaining capacity - parcel weight) lesser than minimum capacity
+				//(remaining capacity - parcel weight) lesser than current minimum capacity
 				if(allocatedTrucks.get(j).getRemainingCapacity() >= parcelList.get(i).getWeight() && allocatedTrucks.get(j).getRemainingCapacity() - parcelList.get(i).getWeight() < min) {
 					bestTruck = j; //set best bin to this truck
 					min = allocatedTrucks.get(j).getRemainingCapacity() - parcelList.get(i).getWeight();
@@ -71,13 +73,15 @@ public class BFDAlgorithm extends Algorithm {
 			}
 			
 			//If no trucks can accomodate the parcel, create new truck
-			if(min == allocatedTrucks.get(0).getMaxCapacity() + 1) {
+			if(min == truck.getMaxCapacity() + 1) {
 				allocatedTrucks.add(new Truck());
+				//deduct capacity of truck[allocatedtrucks.size()] by weight of parcel[i]
 				allocatedTrucks.get(allocatedTrucks.size()).deductCapacity(parcelList.get(i).getWeight());
 			}
 			
 			//assign parcel to best truck
 			else {
+				//deduct capacity of best truck by weight of parcel[i]
 				allocatedTrucks.get(bestTruck).deductCapacity(parcelList.get(i).getWeight());
 			}
 		}

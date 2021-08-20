@@ -27,9 +27,13 @@ public class FFDAlgorithm extends Algorithm {
 	 * @param parcelList
 	 */
 	public FFDAlgorithm(ArrayList<Parcel> parcelList) {
-		Collections.sort(parcelList, new SortByWeight()); // sort by comparator
+		Collections.sort(parcelList, new Algorithm()); // sort by comparator
 		this.parcelList = parcelList;
 
+	}
+	
+	public int compare(Parcel a, Parcel b) {
+		return super.compare(a, b);
 	}
 
 	// not sure put at where yet
@@ -60,7 +64,7 @@ public class FFDAlgorithm extends Algorithm {
 
 			for (j = 0; j < allocatedTrucks.size(); j++) { //for parcel size less than truck size, will go into loop
 				if (allocatedTrucks.get(j).getRemainingCapacity() >= parcelList.get(i).getWeight()) { //truck remaining space more larger than parcel weight
-					allocatedTrucks.get(j).deductCapacity(parcelList.get(i).getWeight());
+					allocatedTrucks.get(j).deductCapacity(parcelList.get(i).getWeight()); //deduct capacity of truck[j] by weight of parcel[i]
 					break;
 				}
 			}
@@ -68,7 +72,7 @@ public class FFDAlgorithm extends Algorithm {
 			// If no trucks can accomodate the parcel, create new truck
 			if (j == allocatedTrucks.size()) {
 				allocatedTrucks.add(new Truck());
-				allocatedTrucks.get(j).deductCapacity(parcelList.get(i).getWeight());
+				allocatedTrucks.get(j).deductCapacity(parcelList.get(i).getWeight()); //deduct capacity of truck[j] by weight of parcel[i]
 			}
 		}
 
