@@ -120,11 +120,38 @@ public class MainSystemUI {
 
 	private void displayAllTasks() {
 		System.out.println("-----------------------");
-		System.out.println("Displaying all Tasks result ");
+		System.out.println(" Displaying all Tasks");
 		System.out.println("-----------------------");
 
-		for (Task task : control.getTaskList())
-			printResult(task); // fetch data from file
+		for (Task task : control.getTaskList()) {// fetch data from file
+			System.out.println("Task ID: " + task.getId());
+			System.out.println("Parcel List:: " + task.getParcelList().toString());
+			System.out.println();
+		}
+
+		int input;
+		Task theTask;
+		try {
+			System.out.println("Enter \"0\" to return to the main menu.");
+			System.out.print("Select a task (taskID) -> ");
+			input = scanner.nextInt();
+			if (input == 0) {
+				// skip to the end
+			} else {
+				theTask = control.getTask(input);
+				control.setTask(theTask);
+				control.generateAlgorithmResults();
+				printResult(control.getTask());
+			}
+		} catch (InputMismatchException e) {
+			System.out.println("Please enter a valid task ID!");
+			System.out.println();
+		} catch (NullPointerException e) {
+			System.out.println("Task ID not found!");
+			System.out.println();
+		}
+
+		System.out.println();
 	}
 
 	private void printResult(Task task) {

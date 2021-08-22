@@ -6,6 +6,8 @@ public class TaskList implements ITaskData {
 	private ArrayList<Task> taskList;
 
 	public TaskList(String fileName) throws Exception {
+		this.taskList = new ArrayList<Task>();
+
 		// Task ID starts from 1, 2, 3, 4, ...
 		int taskId = 1;
 		ArrayList<Parcel> arrFromFile = new ArrayList<Parcel>();
@@ -18,7 +20,7 @@ public class TaskList implements ITaskData {
 			dataFromFile = scan.next();
 			if (dataFromFile.equals("next")) {
 				this.taskList.add(new Task(taskId, arrFromFile));
-				arrFromFile.clear();
+				arrFromFile = new ArrayList<Parcel>();
 				taskId++;
 				continue;
 			}
@@ -48,8 +50,10 @@ public class TaskList implements ITaskData {
 	public Task getTask(int id) {
 		Task theTask = null;
 		for (Task task : this.taskList)
-			if (task.getId() == id)
+			if (task.getId() == id) {
 				theTask = task;
+				break;
+			}
 		if (theTask == null)
 			throw new NullPointerException(); // Throw exception when no result found.
 		return theTask;

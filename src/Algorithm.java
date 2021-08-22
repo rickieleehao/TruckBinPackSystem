@@ -4,7 +4,7 @@ public abstract class Algorithm {
 
 	protected ArrayList<Parcel> parcelList;
 	protected ArrayList<Truck> allocatedTrucks;
-	protected float timeAllocated;
+	protected long timeAllocated;
 	protected int totalRemainingCapacity;
 
 	public Algorithm() {
@@ -29,7 +29,7 @@ public abstract class Algorithm {
 		return this.totalRemainingCapacity;
 	}
 
-	protected void setTimeAllocated(float startTime, float endTime) {
+	protected void setTimeAllocated(long startTime, long endTime) {
 		this.timeAllocated = endTime - startTime;
 	}
 

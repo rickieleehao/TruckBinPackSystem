@@ -15,7 +15,7 @@ public class BFDAlgorithm extends Algorithm {
 		boolean parcelAllocated = false;
 		int indexOfBestFitTruck;
 
-		startTime = System.nanoTime();
+		startTime = System.currentTimeMillis();
 		for (Parcel parcel : this.parcelList) {
 			parcelAllocated = false;
 			indexOfBestFitTruck = -1; // reset
@@ -53,7 +53,7 @@ public class BFDAlgorithm extends Algorithm {
 
 		}
 
-		endTime = System.nanoTime();
+		endTime = System.currentTimeMillis();
 		setTimeAllocated(startTime, endTime);
 		updateTotalRemainingCapacity();
 	}

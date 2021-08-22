@@ -18,6 +18,10 @@ public class TaskController {
 		this.task = new Task(newTaskId);
 	}
 
+	public void setTask(Task theTask) {
+		this.task = theTask;
+	}
+	
 	public void addParcel(Parcel parcel) {
 		this.task.addParcel(parcel);
 	}
