@@ -6,13 +6,9 @@ public class Task implements ITask {
 	private Algorithm FFDResult;
 	private Algorithm BFDResult;
 
-	public Task() {
-		
-	}
-	
 	public Task(int id) {
 		this.id = id;
-		this.parcelList = null;
+		this.parcelList = new ArrayList<Parcel>();
 		this.FFDResult = null;
 		this.BFDResult = null;
 	}
@@ -23,12 +19,11 @@ public class Task implements ITask {
 		this.FFDResult = FFDResult;
 		this.BFDResult = BFDResult;
 	}
-	
+
 	public Task(int id, ArrayList<Parcel> parcelList) {
 		this.id = id;
 		this.parcelList = parcelList;
 	}
-
 
 	@Override
 	public void addParcel(Parcel parcel) {

@@ -10,31 +10,33 @@ public class TaskList implements ITaskData {
 		int taskId = 1;
 		ArrayList<Parcel> arrFromFile = new ArrayList<Parcel>();
 		String dataFromFile;
-		try {
-			Scanner scan = new Scanner(new File(fileName));
-			scan.useDelimiter("(,|\r\n|\r|\n)");
 
-			while (scan.hasNext()) {
-				dataFromFile = scan.next();
-				if (dataFromFile.equals("next")) {
-					this.taskList.add(new Task(taskId, arrFromFile));
-					arrFromFile.clear();
-					taskId++;
-					continue;
-				}
-				arrFromFile.add(new Parcel(Integer.parseInt(dataFromFile)));
+		Scanner scan = new Scanner(new File(fileName));
+		scan.useDelimiter("(,|\r\n|\r|\n)");
+
+		while (scan.hasNext()) {
+			dataFromFile = scan.next();
+			if (dataFromFile.equals("next")) {
+				this.taskList.add(new Task(taskId, arrFromFile));
+				arrFromFile.clear();
+				taskId++;
+				continue;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
+			arrFromFile.add(new Parcel(Integer.parseInt(dataFromFile)));
 		}
+
+		scan.close();
 	}
 
 	@Override
 	public int generateTaskId() {
 		// Task ID starts from 1, 2, 3, 4...
 		// new task ID will be the task list's size + 1
-		return this.taskList.size() + 1;
+
+		if (this.taskList == null)
+			return 1;
+		else
+			return this.taskList.size() + 1;
 	}
 
 	@Override

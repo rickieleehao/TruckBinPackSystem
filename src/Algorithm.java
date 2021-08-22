@@ -8,7 +8,7 @@ public abstract class Algorithm {
 	protected int totalRemainingCapacity;
 
 	public Algorithm() {
-		this.allocatedTrucks.add(new Truck()); // initialize one empty truck as default
+		this.allocatedTrucks = new ArrayList<Truck>();
 		this.timeAllocated = 0;
 		this.totalRemainingCapacity = 0;
 	}
@@ -34,17 +34,13 @@ public abstract class Algorithm {
 	}
 
 	protected void updateTotalRemainingCapacity() {
-		int totalRemainingCapacity = this.allocatedTrucks.size() * Truck.MAX_CAPACITY;
-
+		int totalRemainingCapacity = 0;
 		for (Truck truck : this.allocatedTrucks) {
-			for (Parcel parcel : truck.getContainedParcel()) {
-				totalRemainingCapacity -= parcel.getWeight();
-			}
+			totalRemainingCapacity += truck.getRemainingCapacity();
 		}
-
 		this.totalRemainingCapacity = totalRemainingCapacity;
 	}
 
-	abstract void allocateParcels();
+	protected abstract void allocateParcels();
 
 }

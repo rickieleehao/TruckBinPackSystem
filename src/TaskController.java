@@ -14,18 +14,16 @@ public class TaskController {
 	}
 
 	public void createTask() {
-
+		int newTaskId = this.taskList.generateTaskId();
+		this.task = new Task(newTaskId);
 	}
 
 	public void addParcel(Parcel parcel) {
 		this.task.addParcel(parcel);
 	}
 
-	public void generateFFDResult() {
-		this.task.setBFDResult(new FFDAlgorithm(this.task.getParcelList()));
-	}
-
-	public void generateBFDResult() {
+	public void generateAlgorithmResults() {
+		this.task.setFFDResult(new FFDAlgorithm(this.task.getParcelList()));
 		this.task.setBFDResult(new BFDAlgorithm(this.task.getParcelList()));
 	}
 
@@ -38,6 +36,6 @@ public class TaskController {
 	}
 
 	public ArrayList<Task> getTaskList() {
-		return null;
+		return taskList.getTaskList();
 	}
 }

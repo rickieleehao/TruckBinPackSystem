@@ -6,15 +6,17 @@ public class FFDAlgorithm extends Algorithm {
 	public FFDAlgorithm(ArrayList<Parcel> parcelList) {
 		Collections.sort(parcelList); // sort by comparable in reverse order
 		this.parcelList = parcelList;
+		allocateParcels();
 	}
 
 	@Override
-	public void allocateParcels() {
+	protected void allocateParcels() {
 		long startTime, endTime;
 		boolean parcelAllocated = false;
 
 		startTime = System.currentTimeMillis();
 		for (Parcel parcel : this.parcelList) {
+			parcelAllocated = false;
 			for (Truck truck : this.allocatedTrucks) {
 				// check if the truck is able to store the parcel;
 				// if (able)
@@ -24,16 +26,16 @@ public class FFDAlgorithm extends Algorithm {
 					truck.updateRemainingCapacity();
 					parcelAllocated = true;
 				}
+			}
+			// if (the parcel is not allocated into any existing truck)
+			// ----> a new truck will be created
+			// ----> and the parcel will be assigned to the new truck
 
-				// if (the parcel is not allocated into any existing truck)
-				// ----> a new truck will be created
-				// ----> and the parcel will be assigned to the new truck
-
-				if (!parcelAllocated) {
-					Truck newTruck = new Truck();
-					newTruck.addParcel(parcel);
-					this.allocatedTrucks.add(newTruck);
-				}
+			if (!parcelAllocated) {
+				Truck newTruck = new Truck();
+				newTruck.addParcel(parcel);
+				this.allocatedTrucks.add(newTruck);
+				this.allocatedTrucks.get(this.allocatedTrucks.size() - 1).updateRemainingCapacity();
 			}
 		}
 
