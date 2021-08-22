@@ -13,24 +13,24 @@ public class BFDAlgorithm extends Algorithm {
 	protected void allocateParcels() {
 		long startTime, endTime;
 		boolean parcelAllocated = false;
-		int indexOfBestFitTruck = -1;
+		int indexOfBestFitTruck;
 
-		startTime = System.currentTimeMillis();
+		startTime = System.nanoTime();
 		for (Parcel parcel : this.parcelList) {
 			parcelAllocated = false;
+			indexOfBestFitTruck = -1; // reset
 			for (Truck truck : this.allocatedTrucks) {
 				// check if the truck is able to store the parcel;
 				if (truck.getRemainingCapacity() >= parcel.getWeight()) {
+					parcelAllocated = true;
 					// compare the selected truck (ST) with the best fit truck (BFT)
-					// if (BFT + parcel's weight > ST + parcel's weight)
+					// if (BFT + parcel's weight < ST + parcel's weight)
 					// ----> the ST will be the new BFT
-					if (indexOfBestFitTruck == -1) { //initialize the BST
+					if (indexOfBestFitTruck == -1) {
 						indexOfBestFitTruck = this.allocatedTrucks.indexOf(truck);
-						parcelAllocated = true;
 					} else if (this.allocatedTrucks.get(indexOfBestFitTruck).getRemainingCapacity()
-							+ parcel.getWeight() > truck.getRemainingCapacity() + parcel.getWeight()) {
+							- parcel.getWeight() > truck.getRemainingCapacity() - parcel.getWeight()) {
 						indexOfBestFitTruck = this.allocatedTrucks.indexOf(truck);
-						parcelAllocated = true;
 					}
 				}
 			}
@@ -50,9 +50,10 @@ public class BFDAlgorithm extends Algorithm {
 				this.allocatedTrucks.get(indexOfBestFitTruck).addParcel(parcel);
 				this.allocatedTrucks.get(indexOfBestFitTruck).updateRemainingCapacity();
 			}
+
 		}
 
-		endTime = System.currentTimeMillis();
+		endTime = System.nanoTime();
 		setTimeAllocated(startTime, endTime);
 		updateTotalRemainingCapacity();
 	}
