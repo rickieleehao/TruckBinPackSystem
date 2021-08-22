@@ -31,7 +31,7 @@ public class BFDAlgorithm extends Algorithm {
 					}
 				}
 
-				// if (the parcel is not allocated in any existing truck)
+				// if (the parcel is not allocated into any existing truck)
 				// ----> a new truck will be created
 				// ----> and the parcel will be assigned to the new truck
 				// else

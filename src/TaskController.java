@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class TaskController implements Controller {
+public class TaskController {
 
 	private ITask task; // creating task
 	private ITaskData taskList;
@@ -14,22 +14,19 @@ public class TaskController implements Controller {
 	}
 
 	public void createTask() {
-		
+
 	}
 
 	public void addParcel(Parcel parcel) {
 		this.task.addParcel(parcel);
 	}
 
-	public void generateBFDResult() {
-//		BFDAlgorithm algoBFD = new BFDAlgorithm();
-//		algoBFD.generateAllocatedTrucks();
+	public void generateFFDResult() {
+		this.task.setBFDResult(new FFDAlgorithm(this.task.getParcelList()));
 	}
 
-	public void generateFFDResult() {
-		FFDAlgorithm algoFFD = new FFDAlgorithm();
-
-		algoFFD.generateAllocatedTrucks();
+	public void generateBFDResult() {
+		this.task.setBFDResult(new BFDAlgorithm(this.task.getParcelList()));
 	}
 
 	public Task getTask() {
