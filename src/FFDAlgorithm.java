@@ -25,6 +25,7 @@ public class FFDAlgorithm extends Algorithm {
 					truck.addParcel(parcel);
 					truck.updateRemainingCapacity();
 					parcelAllocated = true;
+					break;
 				}
 			}
 			// if (the parcel is not allocated into any existing truck)
