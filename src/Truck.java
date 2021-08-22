@@ -1,54 +1,41 @@
 import java.util.ArrayList;
 
-/**
- * @author RickiE
- * @version 1.0
- * @created 30-Jul-2021 10:27:08 AM
- */
 public class Truck {
 
+	final static String CAPACITY_UNIT = "KG";
+	final static int MAX_CAPACITY = 20;
 	private ArrayList<Parcel> containedParcel;
-	private static String CAPACITY_UNIT = "KG";
-	private static int MAX_CAPACITY = 20;
-	public Parcel m_Parcel;
-	private int remainingCapacity = 20;
+	private int remainingCapacity;
 
-	public Truck(){
+	public Truck() {
 
 	}
 
-	public void finalize() throws Throwable {
-
-	}
-	/**
-	 * 
-	 * @param id
-	 */
-	public void Truck(int id){
-
+	public Truck(ArrayList<Parcel> containedParcel) {
+		this.containedParcel = containedParcel;
+		setRemainingCapacity();
 	}
 
-	public void addParcel(){
+	private void setRemainingCapacity() {
+		int capacity = 0;
+		for (Parcel parcel : this.containedParcel)
+			capacity += parcel.getWeight();
+		this.remainingCapacity = capacity;
+	}
 
+	public void addParcel(Parcel parcel) {
+		this.containedParcel.add(parcel);
 	}
-	
-	public void deductCapacity(int parcelWeight) {
-		remainingCapacity -= parcelWeight;
+
+	public void updateRemainingCapacity() {
+		this.remainingCapacity -= this.containedParcel.get(this.containedParcel.size() - 1).getWeight();
 	}
-	
+
 	public int getRemainingCapacity() {
 		return remainingCapacity;
 	}
 
-	public int getMaxCapacity(){
-		return MAX_CAPACITY;
+	public ArrayList<Parcel> getContainedParcel() {
+		return this.containedParcel;
 	}
-	
-	public void setRemainSpace(int remainSpace) {
-		
-	}
-
-	public ArrayList<Parcel> getContainedParcel(){
-		return null;
-	}
-}//end Truck
+}

@@ -2,15 +2,11 @@ import java.util.ArrayList;
 
 public class TaskController implements Controller {
 
-	private ITask task; //creating task
+	private ITask task; // creating task
 	private ITaskData taskList;
 
-	public TaskController() {
-
-	}
-
 	public TaskController(Task task) {
-
+		this.task = task;
 	}
 
 	public TaskController(TaskList taskList) {
@@ -26,22 +22,20 @@ public class TaskController implements Controller {
 	}
 
 	public void generateBFDResult() {
-		BFDAlgorithm algoBFD = new BFDAlgorithm();
-		
-		algoBFD.generateAllocatedTrucks();
+//		BFDAlgorithm algoBFD = new BFDAlgorithm();
+//		algoBFD.generateAllocatedTrucks();
 	}
 
 	public void generateFFDResult() {
 		FFDAlgorithm algoFFD = new FFDAlgorithm();
-		
+
 		algoFFD.generateAllocatedTrucks();
 	}
 
 	public Task getTask() {
-		
 		return (Task) this.task;
 	}
-	
+
 	public Task getTask(int taskId) {
 		return taskList.getTask(taskId);
 	}

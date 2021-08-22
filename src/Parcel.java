@@ -1,21 +1,23 @@
-import java.util.ArrayList;
+public class Parcel implements Comparable<Parcel> {
 
-public class Parcel {
+	final static int MAX_WEIGHT = 20;
+	final static String WEIGHT_UNIT = "KG";
+	private int weight;
 
-	private double weight;
-	private static final int MAX_WEIGHT = 20;
-	private static String WEIGHT_UNIT = "KG";
-	
-	public double getWeight(){
+	public int getWeight() {
 		return weight;
 	}
-	
+
 	public int getMaxWeight() {
 		return MAX_WEIGHT;
 	}
 
-	public Parcel(double weight){
-		this.weight = weight;
+	public Parcel(double weight) {
+		this.weight = (int) Math.ceil(weight); // Always rounded up
 	}
 
-}//end Parcel
+	@Override
+	public int compareTo(Parcel o) {
+		return o.weight - this.weight; // Reverse order
+	}
+}

@@ -1,60 +1,51 @@
 import java.util.ArrayList;
 import java.util.Comparator;
 
-/**
- * @author RickiE
- * @version 1.0
- * @created 30-Jul-2021 10:27:07 AM
- */
 public abstract class Algorithm {
 
-	private ArrayList<Parcel> parcelList;
-	protected ArrayList<Truck> allocatedTruck;
+	protected ArrayList<Parcel> parcelList;
+	protected ArrayList<Truck> allocatedTrucks;
 	protected float timeAllocated;
-	protected int remainingCapacity;
-	public Truck m_Truck;
+	protected int totalRemainingCapacity;
 
-	public Algorithm(){
-
+	public Algorithm() {
+		this.allocatedTrucks.add(new Truck()); // initialize one empty truck as default
+		this.timeAllocated = 0;
+		this.totalRemainingCapacity = 0;
 	}
 
-	public void finalize() throws Throwable {
-
-	}
-	/**
-	 * 
-	 * @param allocatedTrucks
-	 * @param timeAllocated
-	 * @param remainingCapacity
-	 */
-	public Algorithm(ArrayList<Truck> allocatedTrucks, float timeAllocated, int remainingCapacity){
-		
-		this.allocatedTruck = allocatedTrucks;
-		this.timeAllocated = timeAllocated;
-		this.remainingCapacity = remainingCapacity;
-		
+	public ArrayList<Parcel> getParcelList() {
+		return this.parcelList;
 	}
 
-	/**
-	 * 
-	 * @param parcelList
-	 */
-	public Algorithm(ArrayList<Parcel> parcelList){
-		
-		this.parcelList = parcelList;
-		
+	public ArrayList<Truck> getAllocatedTrucks() {
+		return this.allocatedTrucks;
 	}
 
-	public ArrayList<Truck> getAllocatedTrucks(){
-		return this.allocatedTruck;
+	public float getTimeAllocated() {
+		return this.timeAllocated;
 	}
 
-	public int getRemainingCapacity(){
-		return this.remainingCapacity;		
+	public int getRemainingCapacity() {
+		return this.totalRemainingCapacity;
 	}
 
-	public abstract void generateAllocatedTrucks(); //I changed to public (ze)
+	protected void setTimeAllocated(float startTime, float endTime) {
+		this.timeAllocated = endTime - startTime;
+	}
 
-	public abstract float getTimeAllocated();
-	
-}//end Algorithm
+	protected void updateTotalRemainingCapacity() {
+		int totalRemainingCapacity = this.allocatedTrucks.size() * Truck.MAX_CAPACITY;
+
+		for (Truck truck : this.allocatedTrucks) {
+			for (Parcel parcel : truck.getContainedParcel()) {
+				totalRemainingCapacity -= parcel.getWeight();
+			}
+		}
+
+		this.totalRemainingCapacity = totalRemainingCapacity;
+	}
+
+	abstract void allocateParcels();
+
+}

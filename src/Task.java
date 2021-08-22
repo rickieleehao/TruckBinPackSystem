@@ -1,72 +1,67 @@
 import java.util.*;
 
-public class Task implements ITask
-//, Comparable<Task> {
-{
-
+public class Task implements ITask {
 	private int id;
 	private ArrayList<Parcel> parcelList;
 	private Algorithm FFDResult;
 	private Algorithm BFDResult;
-	public Parcel m_Parcel;
-	public Algorithm m_Algorithm;
 
-
-	public Task(int id){
+	public Task() {
+		
+	}
+	
+	public Task(int id) {
 		this.id = id;
 		this.parcelList = null;
 		this.FFDResult = null;
 		this.BFDResult = null;
 	}
 
-	public Task(int id, ArrayList<Parcel> parcelList, Algorithm FFDResult, Algorithm BFDResult){
+	public Task(int id, ArrayList<Parcel> parcelList, Algorithm FFDResult, Algorithm BFDResult) {
 		this.id = id;
 		this.parcelList = parcelList;
 		this.FFDResult = FFDResult;
 		this.BFDResult = BFDResult;
 	}
-
-	public void addParcel(Parcel parcel){
-		parcelList.add(parcel);
+	
+	public Task(int id, ArrayList<Parcel> parcelList) {
+		this.id = id;
+		this.parcelList = parcelList;
 	}
 
-	public int getId(){
-		return id;
+
+	@Override
+	public void addParcel(Parcel parcel) {
+		this.parcelList.add(parcel);
 	}
 
-	public Algorithm getFFDResult(){
-		return FFDResult;
+	@Override
+	public int getId() {
+		return this.id;
 	}
 
-	public Algorithm getBFDResult(){
-		return BFDResult;
+	@Override
+	public ArrayList<Parcel> getParcelList() {
+		return this.parcelList;
 	}
 
-	public ParcelList getParcelList(){
-		return ParcelList;
+	@Override
+	public Algorithm getFFDResult() {
+		return this.FFDResult;
 	}
 
-	/**
-	 * 
-	 * @param FFDResult
-	 */
-	public void setFFDResult(Algorithm FFDResult){
+	@Override
+	public Algorithm getBFDResult() {
+		return this.BFDResult;
+	}
+
+	@Override
+	public void setFFDResult(Algorithm FFDResult) {
 		this.FFDResult = FFDResult;
 	}
 
-	/**
-	 * 
-	 * @param BFDResult
-	 */
-	public void setBFDResult(Algorithm BFDResult){
+	@Override
+	public void setBFDResult(Algorithm BFDResult) {
 		this.BFDResult = BFDResult;
 	}
-	
-	
-	
-	@Override
-	public ArrayList<Parcel> getParcelList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-}//end Task
+}

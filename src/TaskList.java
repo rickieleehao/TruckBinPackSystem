@@ -1,103 +1,64 @@
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.File;
 import java.util.*;
 
-/**
- * @author RickiE
- * @version 1.0
- * @created 30-Jul-2021 10:27:08 AM
- */
 public class TaskList implements ITaskData {
 
 	private ArrayList<Task> taskList;
-	private String fileName;
-	public Task m_Task;
 
-	public TaskList() {
-
-	}
-
-	public void finalize() throws Throwable {
-
-	}
-
-	/**
-	 * 
-	 * @param fileName
-	 */
-	public TaskList(String fileName) {
-		// TODO: How to cast when reading string?
-
+	public TaskList(String fileName) throws Exception {
+		// Task ID starts from 1, 2, 3, 4, ...
+		int taskId = 1;
+		ArrayList<Parcel> arrFromFile = new ArrayList<Parcel>();
+		String dataFromFile;
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(fileName));
+			Scanner scan = new Scanner(new File(fileName));
+			scan.useDelimiter("(,|\r\n|\r|\n)");
 
-			String lineText;
-			while ((lineText = in.readLine()) != null) {
-				String[] line = lineText.split(",");
-				Task aTask = new Task(line[0], line[1], line[2], line[3]);
-				taskList.add(aTask);
+			while (scan.hasNext()) {
+				dataFromFile = scan.next();
+				if (dataFromFile.equals("next")) {
+					this.taskList.add(new Task(taskId, arrFromFile));
+					arrFromFile.clear();
+					taskId++;
+					continue;
+				}
+				arrFromFile.add(new Parcel(Integer.parseInt(dataFromFile)));
 			}
-			in.close();
-			System.out.println("Read in task list successful.");
-		} catch (IOException e) {
-			System.out.println("File read task list error.");
-			System.exit(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		}
 	}
 
+	@Override
 	public int generateTaskId() {
-
-		int taskIDCounter = 0;
-
-		taskIDCounter++;
-		return taskIDCounter - 1;
+		// Task ID starts from 1, 2, 3, 4...
+		// new task ID will be the task list's size + 1
+		return this.taskList.size() + 1;
 	}
 
-	/**
-	 * 
-	 * @param newTask
-	 */
+	@Override
 	public void addTask(Task newTask) {
 		taskList.add(newTask);
 	}
 
-	/**
-	 * 
-	 * @param id
-	 */
-
-	/*
-	 * public Task searchTask(int id) { boolean found = false; int i = 0; int count
-	 * = taskList.size();
-	 * 
-	 * Task theTask = null;
-	 * 
-	 * while (i < count && !found) { theTask = taskList.get(i); if
-	 * (theTask.getId().equals(id)) found = true; else i++; } if (!found) theTask =
-	 * null;
-	 * 
-	 * return theTask; }
-	 */
-
+	@Override
 	public Task getTask(int id) {
-
-		// TODO: Not sure. Can try for loop.
-
-		Iterator iterator = taskList.iterator();
-		while (iterator.hasNext()) {
-			if (iterator.next().equals(id)) {
-				return (Task) iterator.next();
-			}
-		}
-		return null;
+		Task theTask = null;
+		for (Task task : this.taskList)
+			if (task.getId() == id)
+				theTask = task;
+		if (theTask == null)
+			throw new NullPointerException(); // Throw exception when no result found.
+		return theTask;
 	}
 
+	@Override
 	public ArrayList<Task> getTaskList() {
-		return taskList;
+		return this.taskList;
 	}
 
 	public void writeToFile() {
 		// TODO: write here?
 	}
-}// end TaskList
+}
