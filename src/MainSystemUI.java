@@ -125,7 +125,8 @@ public class MainSystemUI {
 
 		for (Task task : control.getTaskList()) {// fetch data from file
 			System.out.println("Task ID: " + task.getId());
-			System.out.println("Parcel List:: " + task.getParcelList().toString());
+			System.out.println("Total Parcels: "+task.getParcelList().size());
+			System.out.println("Parcel List: " + task.getParcelList().toString());
 			System.out.println();
 		}
 
@@ -168,12 +169,16 @@ public class MainSystemUI {
 
 			System.out.println("Number of truck allocated: " + algo.getAllocatedTrucks().size());
 
+			int count = 0;
 			int truckNumber = 0;
 			for (Truck truck : algo.getAllocatedTrucks()) {
 				truckNumber++;
 				System.out.println("Truck#" + truckNumber + " : " + truck.getContainedParcel().toString());
+				if(truck.getRemainingCapacity() == 0)
+					count++;
 			}
 
+			System.out.println("Trucks fully loaded with parcels: " + count);
 			System.out.println("Time Allocated: " + algo.getTimeAllocated());
 			System.out.println("Remaining Capacity: " + algo.getRemainingCapacity());
 			System.out.println();

@@ -13,7 +13,6 @@ public class FFDAlgorithm extends Algorithm {
 	protected void allocateParcels() {
 		long startTime, endTime;
 		boolean parcelAllocated = false;
-
 		startTime = System.currentTimeMillis();
 		for (Parcel parcel : this.parcelList) {
 			parcelAllocated = false;
