@@ -3,7 +3,6 @@ import java.util.InputMismatchException;
 public class Parcel implements Comparable<Parcel> {
 
 	final static int MAX_WEIGHT = 20;
-	final static String WEIGHT_UNIT = "KG";
 	private int weight;
 
 	public Parcel(double weight) {
@@ -20,8 +19,8 @@ public class Parcel implements Comparable<Parcel> {
 	}
 
 	@Override
-	public int compareTo(Parcel o) {
-		return o.weight - this.weight; // Reverse order
+	public int compareTo(Parcel p) {
+		return p.weight - this.weight; // Reverse order
 	}
 
 	@Override

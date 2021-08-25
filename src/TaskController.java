@@ -18,17 +18,25 @@ public class TaskController {
 		this.task = new Task(newTaskId);
 	}
 
-	public void setTask(Task theTask) {
-		this.task = theTask;
-	}
-	
 	public void addParcel(Parcel parcel) {
 		this.task.addParcel(parcel);
 	}
 
+	public void updateTaskToList() {
+		this.taskList.addTask((Task)this.task);
+	}
+	
 	public void generateAlgorithmResults() {
 		this.task.setFFDResult(new FFDAlgorithm(this.task.getParcelList()));
 		this.task.setBFDResult(new BFDAlgorithm(this.task.getParcelList()));
+	}
+	
+	public void updateFile() {
+		this.taskList.updateFile();
+	}
+
+	public void setTask(Task theTask) {
+		this.task = theTask;
 	}
 
 	public Task getTask() {

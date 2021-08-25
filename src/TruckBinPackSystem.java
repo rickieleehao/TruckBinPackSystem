@@ -19,6 +19,5 @@ public class TruckBinPackSystem {
 			System.out.println(dataFile + " has error!");
 			System.out.println("System terminated!");
 		}
-
 	}
 }

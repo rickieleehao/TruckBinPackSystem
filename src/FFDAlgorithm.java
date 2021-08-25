@@ -13,10 +13,12 @@ public class FFDAlgorithm extends Algorithm {
 	protected void allocateParcels() {
 		long startTime, endTime;
 		boolean parcelAllocated = false;
+		this.allocatedTrucks.add(new Truck()); // initial the 1st empty truck
 		startTime = System.currentTimeMillis();
+		
 		for (Parcel parcel : this.parcelList) {
 			parcelAllocated = false;
-			for (Truck truck : this.allocatedTrucks) {
+			for (Truck truck : this.allocatedTrucks) { //
 				// check if the truck is able to store the parcel;
 				// if (able)
 				// ---> add the parcel into the truck

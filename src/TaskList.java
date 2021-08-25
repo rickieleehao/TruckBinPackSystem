@@ -1,11 +1,14 @@
 import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 
 public class TaskList implements ITaskData {
 
 	private ArrayList<Task> taskList;
+	private String fileName;
 
 	public TaskList(String fileName) throws Exception {
+		this.fileName = fileName;
 		this.taskList = new ArrayList<Task>();
 
 		// Task ID starts from 1, 2, 3, 4, ...
@@ -14,10 +17,10 @@ public class TaskList implements ITaskData {
 		String dataFromFile;
 
 		Scanner scan = new Scanner(new File(fileName));
-		scan.useDelimiter("(,|\r\n|\r|\n)");
+		scan.useDelimiter("([|]|,|\r\n|\r|\n)");
 
 		while (scan.hasNext()) {
-			dataFromFile = scan.next();
+			dataFromFile = scan.next().replace(" ", "").replace("[", "").replace("]", "");
 			if (dataFromFile.equals("next")) {
 				this.taskList.add(new Task(taskId, arrFromFile));
 				arrFromFile = new ArrayList<Parcel>();
@@ -64,7 +67,19 @@ public class TaskList implements ITaskData {
 		return this.taskList;
 	}
 
-	public void writeToFile() {
-		// TODO: write here?
+	@Override
+	public void updateFile() {
+		try {
+			FileWriter file = new FileWriter(this.fileName);
+			file.write(""); // empty the file
+			file.close();
+			FileWriter write = new FileWriter(this.fileName, true);
+			for (Task task : this.taskList) {
+				write.write(task.getParcelList().toString() + ",next\r\n");
+			}
+			write.close();
+		} catch (Exception e) {
+
+		}
 	}
 }

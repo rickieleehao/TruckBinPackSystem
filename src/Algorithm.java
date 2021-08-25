@@ -21,7 +21,7 @@ public abstract class Algorithm {
 		return this.allocatedTrucks;
 	}
 
-	public float getTimeAllocated() {
+	public long getTimeAllocated() {
 		return this.timeAllocated;
 	}
 

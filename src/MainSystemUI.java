@@ -22,37 +22,34 @@ public class MainSystemUI {
 					System.out.println("   TruckBinPackSystem");
 					System.out.println("-----------------------");
 					System.out.println("1. Create new Task");
-					System.out.println("2. Search task");
-					System.out.println("3. Display all tasks");
-					System.out.println("4. Exit");
+					System.out.println("2. Display all tasks");
+					System.out.println("3. Exit");
 					System.out.print("Pick option (1-4) ----> ");
 					choice = scanner.nextInt();
 					scanner.nextLine();
 					error = false;
+					switch (choice) {
+					case 1:
+						createTask();
+						break;
+					case 2:
+						displayAllTasks();
+						break;
+					case 3:
+						exit = true;
+						break;
+					default:
+						System.out.println("Invalid option.\n");
+					}
 				} catch (InputMismatchException e) {
 					scanner.nextLine();
 					System.out.println("Please enter a valid number.\n");
 				} catch (IndexOutOfBoundsException e) {
 					scanner.nextLine();
 					System.out.println("Option cannot be negative!\n");
+				} finally {
+					control.updateFile();
 				}
-			}
-
-			switch (choice) {
-			case 1:
-				createTask();
-				break;
-			case 2:
-				searchTask();
-				break;
-			case 3:
-				displayAllTasks();
-				break;
-			case 4:
-				exit = true;
-				break;
-			default:
-				System.out.println("Invalid option.\n");
 			}
 		}
 	}
@@ -94,28 +91,8 @@ public class MainSystemUI {
 		System.out.println();
 
 		control.generateAlgorithmResults();
+		control.updateTaskToList();
 		printResult(control.getTask());
-	}
-
-	private void searchTask() {
-		Task retrievedTask = null;
-		boolean isFound = false, exit = false;
-		System.out.println("-----------------------");
-		System.out.println("   Searching a Task");
-		System.out.println("-----------------------");
-		while (!isFound || exit) {
-			try {
-				System.out.print("Kindly enter the Task ID -> ");
-				retrievedTask = control.getTask(scanner.nextInt());
-				isFound = true;
-			} catch (InputMismatchException e) {
-				scanner.nextLine();
-				System.out.println("Please enter a valid Task ID.\n");
-				System.out.println("e.g. 001");
-			} // option to cancel the searching progress
-		}
-
-		printResult(retrievedTask);
 	}
 
 	private void displayAllTasks() {
@@ -125,7 +102,7 @@ public class MainSystemUI {
 
 		for (Task task : control.getTaskList()) {// fetch data from file
 			System.out.println("Task ID: " + task.getId());
-			System.out.println("Total Parcels: "+task.getParcelList().size());
+			System.out.println("Total Parcels: " + task.getParcelList().size());
 			System.out.println("Parcel List: " + task.getParcelList().toString());
 			System.out.println();
 		}
@@ -174,7 +151,7 @@ public class MainSystemUI {
 			for (Truck truck : algo.getAllocatedTrucks()) {
 				truckNumber++;
 				System.out.println("Truck#" + truckNumber + " : " + truck.getContainedParcel().toString());
-				if(truck.getRemainingCapacity() == 0)
+				if (truck.getRemainingCapacity() == 0)
 					count++;
 			}
 

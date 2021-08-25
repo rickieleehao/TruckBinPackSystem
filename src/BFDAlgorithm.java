@@ -12,18 +12,16 @@ public class BFDAlgorithm extends Algorithm {
 	@Override
 	protected void allocateParcels() {
 		long startTime, endTime;
-		boolean parcelAllocated = false;
 		int indexOfBestFitTruck;
+		this.allocatedTrucks.add(new Truck()); // initial the 1st empty truck
 		Truck bestFitTruck = null;
 
 		startTime = System.currentTimeMillis();
 		for (Parcel parcel : this.parcelList) {
-			parcelAllocated = false;
 			bestFitTruck = null;
 			for (Truck truck : this.allocatedTrucks) {
 				// check if the truck is able to store the parcel;
 				if (truck.getRemainingCapacity() >= parcel.getWeight()) {
-					parcelAllocated = true;
 					// compare the selected truck (ST) with the best fit truck (BFT)
 					// if (BFT + parcel's weight < ST + parcel's weight)
 					// ----> the ST will be the new BFT
@@ -42,7 +40,7 @@ public class BFDAlgorithm extends Algorithm {
 			// else
 			// ----> the parcel will be added into the BFT
 
-			if (!parcelAllocated) {
+			if (bestFitTruck == null) {
 				Truck newTruck = new Truck();
 				newTruck.addParcel(parcel);
 				this.allocatedTrucks.add(newTruck);

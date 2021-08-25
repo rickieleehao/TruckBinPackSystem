@@ -10,4 +10,5 @@ public interface ITaskData {
 
 	public ArrayList<Task> getTaskList();
 
+	public void updateFile();
 }

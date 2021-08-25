@@ -13,13 +13,6 @@ public class Task implements ITask {
 		this.BFDResult = null;
 	}
 
-	public Task(int id, ArrayList<Parcel> parcelList, Algorithm FFDResult, Algorithm BFDResult) {
-		this.id = id;
-		this.parcelList = parcelList;
-		this.FFDResult = FFDResult;
-		this.BFDResult = BFDResult;
-	}
-
 	public Task(int id, ArrayList<Parcel> parcelList) {
 		this.id = id;
 		this.parcelList = parcelList;
