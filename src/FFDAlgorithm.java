@@ -14,7 +14,7 @@ public class FFDAlgorithm extends Algorithm {
 		long startTime, endTime;
 		boolean parcelAllocated = false;
 		this.allocatedTrucks.add(new Truck()); // initial the 1st empty truck
-		startTime = System.currentTimeMillis();
+		startTime = System.nanoTime();
 		
 		for (Parcel parcel : this.parcelList) {
 			parcelAllocated = false;
@@ -38,10 +38,10 @@ public class FFDAlgorithm extends Algorithm {
 				newTruck.addParcel(parcel);
 				this.allocatedTrucks.add(newTruck);
 				this.allocatedTrucks.get(this.allocatedTrucks.size() - 1).updateRemainingCapacity();
-			}
+			} 
 		}
 
-		endTime = System.currentTimeMillis();
+		endTime = System.nanoTime();
 		setTimeAllocated(startTime, endTime);
 		updateTotalRemainingCapacity();
 	}

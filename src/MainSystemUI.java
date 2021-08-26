@@ -156,7 +156,7 @@ public class MainSystemUI {
 			}
 
 			System.out.println("Trucks fully loaded with parcels: " + count);
-			System.out.println("Time Allocated: " + algo.getTimeAllocated());
+			System.out.println("Time Allocated: " + algo.getTimeAllocated() + " nanosecond");
 			System.out.println("Remaining Capacity: " + algo.getRemainingCapacity());
 			System.out.println();
 		}

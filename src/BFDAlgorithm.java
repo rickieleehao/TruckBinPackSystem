@@ -12,11 +12,10 @@ public class BFDAlgorithm extends Algorithm {
 	@Override
 	protected void allocateParcels() {
 		long startTime, endTime;
-		int indexOfBestFitTruck;
 		this.allocatedTrucks.add(new Truck()); // initial the 1st empty truck
 		Truck bestFitTruck = null;
 
-		startTime = System.currentTimeMillis();
+		startTime = System.nanoTime();
 		for (Parcel parcel : this.parcelList) {
 			bestFitTruck = null;
 			for (Truck truck : this.allocatedTrucks) {
@@ -46,14 +45,13 @@ public class BFDAlgorithm extends Algorithm {
 				this.allocatedTrucks.add(newTruck);
 				this.allocatedTrucks.get(this.allocatedTrucks.size() - 1).updateRemainingCapacity();
 			} else {
-				indexOfBestFitTruck = this.allocatedTrucks.indexOf(bestFitTruck);
-				this.allocatedTrucks.get(indexOfBestFitTruck).addParcel(parcel);
-				this.allocatedTrucks.get(indexOfBestFitTruck).updateRemainingCapacity();
+				bestFitTruck.addParcel(parcel);
+				bestFitTruck.updateRemainingCapacity();
 			}
 
 		}
 
-		endTime = System.currentTimeMillis();
+		endTime = System.nanoTime();
 		setTimeAllocated(startTime, endTime);
 		updateTotalRemainingCapacity();
 	}
