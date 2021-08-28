@@ -69,9 +69,9 @@ public class MainSystemUI {
 					System.out.println("#enter \"n\" if you have no more parcel to enter.");
 				}
 				System.out.print("Parcel weight -> ");
-				if (scanner.hasNextInt()) {
+				if (scanner.hasNextDouble()) {
 					try {
-						control.addParcel(new Parcel(scanner.nextInt()));
+						control.addParcel(new Parcel(scanner.nextDouble()));
 					} catch (InputMismatchException e) {
 						System.out.println("Parcel weight cannot exceed " + Parcel.MAX_WEIGHT + "!");
 					}

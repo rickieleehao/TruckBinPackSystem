@@ -7,7 +7,7 @@ public class Parcel implements Comparable<Parcel> {
 
 	public Parcel(double weight) {
 		int roundedWeight = (int) Math.ceil(weight); // Always rounded up
-		
+
 		if (roundedWeight > Parcel.MAX_WEIGHT)
 			throw new InputMismatchException();
 		else

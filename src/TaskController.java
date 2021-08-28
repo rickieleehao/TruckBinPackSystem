@@ -23,14 +23,14 @@ public class TaskController {
 	}
 
 	public void updateTaskToList() {
-		this.taskList.addTask((Task)this.task);
+		this.taskList.addTask((Task) this.task);
 	}
-	
+
 	public void generateAlgorithmResults() {
 		this.task.setFFDResult(new FFDAlgorithm(this.task.getParcelList()));
 		this.task.setBFDResult(new BFDAlgorithm(this.task.getParcelList()));
 	}
-	
+
 	public void updateFile() {
 		this.taskList.updateFile();
 	}

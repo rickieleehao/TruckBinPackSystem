@@ -7,7 +7,7 @@ public class Truck {
 	private int remainingCapacity;
 
 	public Truck() {
-		this.containedParcel = new ArrayList<Parcel> ();
+		this.containedParcel = new ArrayList<Parcel>();
 		this.remainingCapacity = Truck.MAX_CAPACITY;
 	}
 
